@@ -30,3 +30,19 @@ def test_with_test_double():
 
     assert result == "b", "most_common_word_in_web_page tested with test double"
     assert test_ua.url == "https://python.org/"
+
+
+def test_with_test_mock():
+    from unittest.mock import Mock
+    mock_requests = Mock()
+    mock_requests.get.return_value.text = "aa bbb c"
+
+    result = most_common_word_in_web_page(
+        ["a", "b", "c"],
+        "https://python.org/",
+        user_agent=mock_requests
+    )
+
+    assert result == "b", "most_common_word_in_web_page tested with test mock"
+    assert mock_requests.get.call_count == 1
+    assert mock_requests.get.call_args[0][0] == "https://python.org/", "Called with right URL"
