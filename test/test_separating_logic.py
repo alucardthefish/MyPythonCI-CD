@@ -1,4 +1,5 @@
 from separating_logic import most_common_word, most_common_word_in_web_page
+from unittest.mock import Mock, patch
 
 
 def test_most_common_word():
@@ -33,7 +34,6 @@ def test_with_test_double():
 
 
 def test_with_test_mock():
-    from unittest.mock import Mock
     mock_requests = Mock()
     mock_requests.get.return_value.text = "aa bbb c"
 
