@@ -13,13 +13,14 @@ def test_some_data(some_data):
     """Use fixture return value in a test."""
     assert some_data == 42
 
-@pytest.fixture(scope="module")
-def cards_db():
-    with TemporaryDirectory() as db_dir:
-        db_path = Path(db_dir)
-        db = cards.CardsDB(db_path)
-        yield db
-        db.close()
+# -- this code was tranfered to conftest.py file and use a session scope
+# @pytest.fixture(scope="module")
+# def cards_db():
+#     with TemporaryDirectory() as db_dir:
+#         db_path = Path(db_dir)
+#         db = cards.CardsDB(db_path)
+#         yield db
+#         db.close()
 
 def test_empty(cards_db):
     assert cards_db.count() == 0
